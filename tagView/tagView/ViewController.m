@@ -57,7 +57,13 @@
 
     UIImageWriteToSavedPhotosAlbum(newImage, self, @selector(imageSaveToPhoto:error:contextInfo:), nil);
 }
-
+/**
+ *  在图片的基础上截取新图片
+ *
+ *  @param image <#image description#>
+ *
+ *  @return <#return value description#>
+ */
 - (UIImage*)creatNewImageFrom:(UIImage*)image
 {
     CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, self.coverView.frame);
