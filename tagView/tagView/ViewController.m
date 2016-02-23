@@ -21,6 +21,8 @@
  */
 @property (strong, nonatomic) NSMutableDictionary* dict;
 
+@property (strong, nonatomic) UIImage* newmage;
+
 @end
 
 @implementation ViewController
@@ -28,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     //设置内容显示模式
     self.dishName.enabled = NO;
     self.dishPrice.enabled = NO;
@@ -43,32 +46,19 @@
 {
     //截取整个imageView
 
-    UIGraphicsBeginImageContext(self.backImage.bounds.size);
-
+    UIGraphicsBeginImageContextWithOptions(self.coverView.bounds.size, NO, 0);
+    
     CGContextRef ref = UIGraphicsGetCurrentContext();
 
+    CGContextTranslateCTM(ref, -self.coverView.x, -self.coverView.y);
+    
     [self.backImage.layer renderInContext:ref];
-
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    //再将截取的图片二次截取
-    newImage = [self creatNewImageFrom:newImage];
+    
+    self.newmage = UIGraphicsGetImageFromCurrentImageContext();
 
     UIGraphicsEndImageContext();
 
-    UIImageWriteToSavedPhotosAlbum(newImage, self, @selector(imageSaveToPhoto:error:contextInfo:), nil);
-}
-
-- (UIImage*)creatNewImageFrom:(UIImage*)image
-{
-    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, self.coverView.frame);
-    UIGraphicsBeginImageContext(self.backImage.image.size);
-
-    CGContextRef ref = UIGraphicsGetCurrentContext();
-
-    CGContextDrawImage(ref, self.coverView.frame, imageRef);
-    UIImage* newImage = [UIImage imageWithCGImage:imageRef];
-    UIGraphicsEndImageContext();
-    return newImage;
+    UIImageWriteToSavedPhotosAlbum(self.newmage, self, @selector(imageSaveToPhoto:error:contextInfo:), nil);
 }
 
 - (void)imageSaveToPhoto:(UIImage*)image error:(NSError*)error contextInfo:(void*)contextInfo
