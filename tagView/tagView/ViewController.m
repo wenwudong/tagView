@@ -58,7 +58,29 @@
 
     UIGraphicsEndImageContext();
 
+
     UIImageWriteToSavedPhotosAlbum(self.newmage, self, @selector(imageSaveToPhoto:error:contextInfo:), nil);
+
+}
+/**
+ *  在图片的基础上截取新图片
+ *
+ *  @param image <#image description#>
+ *
+ *  @return <#return value description#>
+ */
+- (UIImage*)creatNewImageFrom:(UIImage*)image
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, self.coverView.frame);
+    UIGraphicsBeginImageContext(self.backImage.image.size);
+
+    CGContextRef ref = UIGraphicsGetCurrentContext();
+
+    CGContextDrawImage(ref, self.coverView.frame, imageRef);
+    UIImage* newImage = [UIImage imageWithCGImage:imageRef];
+    UIGraphicsEndImageContext();
+    return newImage;
+>>>>>>> cd527c74ad9a9817bb2da98990f5a1e8aee0180a
 }
 
 - (void)imageSaveToPhoto:(UIImage*)image error:(NSError*)error contextInfo:(void*)contextInfo
