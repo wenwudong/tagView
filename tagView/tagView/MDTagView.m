@@ -114,6 +114,7 @@
 
         CGPoint newCenter = CGPointMake(pan.view.center.x + translation.x,
             pan.view.center.y + translation.y);
+
         [pan setTranslation:CGPointZero inView:pan.view];
         // 设置拖动范围
         if ((newCenter.y >= pan.view.height / 2) && (newCenter.y <= pan.view.superview.height - pan.view.height / 2) && (newCenter.x >= pan.view.width / 2) && (newCenter.x <= pan.view.superview.width - pan.view.width / 2)) {
