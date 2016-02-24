@@ -110,8 +110,8 @@
     if (pan.state != UIGestureRecognizerStateEnded && pan.state != UIGestureRecognizerStateFailed) {
         //获取手指的相对位移
         CGPoint translation = [pan translationInView:pan.view];
-        NSLog(@"translation%@",NSStringFromCGPoint(translation));
-       
+        NSLog(@"translation%@", NSStringFromCGPoint(translation));
+
         CGPoint newCenter = CGPointMake(pan.view.center.x + translation.x,
             pan.view.center.y + translation.y);
         [pan setTranslation:CGPointZero inView:pan.view];
@@ -125,7 +125,11 @@
         }
     }
 }
-
+/**
+ *  存储标签的信息
+ *
+ *  @return <#return value description#>
+ */
 - (NSMutableDictionary*)dic
 {
     NSMutableDictionary* dic = [NSMutableDictionary dictionary];

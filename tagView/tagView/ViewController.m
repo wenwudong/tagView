@@ -31,11 +31,10 @@
 {
     [super viewDidLoad];
 
-    //设置内容显示模式
     self.dishName.enabled = NO;
     self.dishPrice.enabled = NO;
+    //图片自适应显示
     self.backImage.contentMode = UIViewContentModeScaleAspectFit;
-    // Do any additional setup after loading the view, typically from a nib.
 }
 /**
  *  保存图片
@@ -44,18 +43,18 @@
  */
 - (IBAction)save:(id)sender
 {
-    //截取整个imageView
 
+    //开启图形上下文
     UIGraphicsBeginImageContextWithOptions(self.coverView.bounds.size, NO, 0);
-
+    //获取图形上下文
     CGContextRef ref = UIGraphicsGetCurrentContext();
-
+    //移动截取框
     CGContextTranslateCTM(ref, -self.coverView.x, -self.coverView.y);
-
+    //渲染
     [self.backImage.layer renderInContext:ref];
 
     self.newmage = UIGraphicsGetImageFromCurrentImageContext();
-
+    //关闭
     UIGraphicsEndImageContext();
 
     UIImageWriteToSavedPhotosAlbum(self.newmage, self, @selector(imageSaveToPhoto:error:contextInfo:), nil);
@@ -86,6 +85,7 @@
  */
 - (IBAction)addPic:(UIButton*)sender
 {
+    //重复选择添加图片，防止coverView叠加
     [self.coverView removeFromSuperview];
     UIImagePickerController* imagePick = [[UIImagePickerController alloc] init];
     imagePick.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
@@ -111,6 +111,7 @@
     //为了防止二次添加图片时点击按钮无响应
     self.dishName.selected = NO;
     self.dishPrice.selected = NO;
+
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -157,7 +158,7 @@
         tagView.isPos = NO;
         tagView.tags = 999;
         tagView.origin = CGPointMake(self.coverView.width / 2, self.coverView.height / 2);
-        tagView.labelText = @"人肉叉烧包";
+        tagView.labelText = @"春卷";
     }
     else if (buttonTag == 1) {
         tagView.isPos = NO;
