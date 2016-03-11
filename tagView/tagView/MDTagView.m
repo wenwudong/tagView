@@ -24,12 +24,10 @@
     if (self) {
         self.label = [[UILabel alloc] init];
         self.label.textColor = [UIColor whiteColor];
+        
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
         self.imageView.image = [UIImage imageNamed:@"textTag"];
 
-        self.imageView.origin = CGPointMake(0, 0);
-        self.imageView.size = CGSizeMake(self.imageView.image.size.width,
-            self.imageView.image.size.height);
         [self.imageView addSubview:self.label];
         //点击手势
         UITapGestureRecognizer* tap =

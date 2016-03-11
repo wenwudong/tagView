@@ -98,6 +98,7 @@
 {
     UIImage* image = info[@"UIImagePickerControllerEditedImage"];
     self.backImage.image = image;
+    
     self.coverView = [[UIView alloc] init];
 
     self.coverView.size = [self scaleSizeWithImage:self.backImage.image andImageView:self.backImage];

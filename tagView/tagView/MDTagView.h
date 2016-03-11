@@ -14,7 +14,7 @@
  */
 @property (copy, nonatomic) NSString* labelText;
 /**
- *  标签位置
+ *  标签位置（暂时无用）
  */
 @property (assign, nonatomic) CGPoint point;
 /**
@@ -22,11 +22,11 @@
  */
 @property (assign, nonatomic) BOOL isPos;
 /**
- *  记录标签数据
+ *  记录标签数据（暂时无用）
  */
 @property (strong, nonatomic) NSMutableDictionary* dic;
 /**
- *  相当于tag
+ *  相当于tag（字典存储时一对一）
  */
 @property (assign, nonatomic) NSInteger tags;
 
